@@ -67,12 +67,22 @@ If the lock's master code is changed later, remove the lock from Home Assistant 
 
 ## Security
 
-- **A captured command could be replayed.** The lock's protection against replay is a plain
-  timestamp in each command, so someone recording Bluetooth traffic within radio range could
-  plausibly resend a captured lock or unlock command. This is a property of the lock's protocol,
-  and nothing in this integration can change it.
-- Anyone who can use your Home Assistant can unlock your door. Protect it accordingly.
-- A lock or unlock command is sent **once** and never retried, whatever happens.
+- **Commands are encrypted, and only your master code and the lock's own id can read them.**
+  Before a command leaves Home Assistant it is scrambled with AES, using a key built from your
+  Lockly master code and the lock's id — neither of which is ever sent over the air. Someone
+  listening to the Bluetooth nearby sees only scrambled bytes: they cannot read a command, and
+  cannot alter one and have the lock accept it (any change to the scrambled bytes fails the lock's
+  own checks).
+- **A recorded command cannot be replayed to open or close the door.** Each command carries a
+  timestamp and the lock refuses a stale one. We checked this on the real lock: a command captured
+  and sent again 5 seconds later, and again 30 seconds later, was refused both times and the bolt
+  did not move. (Verified on the PGK728WRHK; see the project's security notes for the details and
+  the limits of the test.)
+- **Anyone who can use your Home Assistant can unlock your door.** That is where the real control
+  sits — protect your Home Assistant accordingly.
+- **A lock or unlock is sent once and never retried**, whatever happens. If the lock does not
+  confirm, the integration leaves the door as it is and tells you, rather than sending the command
+  again.
 
 ## How it was made
 
