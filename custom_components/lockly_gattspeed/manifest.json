@@ -1,0 +1,17 @@
+{
+  "domain": "lockly_gattspeed",
+  "name": "Lockly GATTspeed",
+  "bluetooth": [
+    { "local_name": "PGK*", "connectable": true },
+    { "local_name": "PGD*", "connectable": true }
+  ],
+  "codeowners": ["@frozenmartini"],
+  "config_flow": true,
+  "dependencies": ["bluetooth_adapters"],
+  "documentation": "https://github.com/frozenmartini/lockly-gattspeed",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/frozenmartini/lockly-gattspeed/issues",
+  "requirements": [],
+  "version": "0.0.1"
+}

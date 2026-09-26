@@ -1,0 +1,47 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "bluetooth_confirm": {
+        "title": "Add {name}?",
+        "description": "Lockly GATTspeed controls this lock over Bluetooth. Next, sign in to your Lockly account once to fetch the lock's codes."
+      },
+      "user": {
+        "title": "Choose a lock",
+        "description": "Lockly locks Home Assistant can hear over Bluetooth.",
+        "data": {
+          "address": "Lock"
+        }
+      },
+      "cloud": {
+        "title": "Sign in to Lockly",
+        "description": "Sign in with the Lockly account {name} is registered to. This is used once, to fetch the lock's codes. Your email, your password and the sign-in are not saved.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "pick_lock": {
+        "title": "Which lock is {name}?",
+        "description": "Your Lockly account has more than one lock. Pick the one you are adding.",
+        "data": {
+          "lock": "Lock"
+        }
+      }
+    },
+    "error": {
+      "cloud_auth": "Lockly did not accept that email and password.",
+      "cloud_unreachable": "Could not reach Lockly. Check the connection and try again.",
+      "cloud_no_locks": "That Lockly account has no lock with usable codes.",
+      "cloud_bad_record": "Lockly sent codes for this lock that could not be used.",
+      "cloud_wrong_lock": "The lock did not accept those codes. They may belong to a different lock on your account.",
+      "cannot_connect": "Could not connect to the lock over Bluetooth. Move a Bluetooth radio or proxy closer to the lock and try again."
+    },
+    "abort": {
+      "already_configured": "This lock is already set up.",
+      "already_in_progress": "This lock is already being set up.",
+      "no_devices_found": "No Lockly lock is in range of Home Assistant's Bluetooth.",
+      "unsupported_model": "This lock model is not supported yet: {error}"
+    }
+  }
+}
